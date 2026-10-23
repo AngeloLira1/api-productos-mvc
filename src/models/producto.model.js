@@ -11,18 +11,18 @@ const Producto = {
         return filas[0];
     },
 
-    async crear({nombre,precio,stock=0}){
-        const [resultado]= await db.query('INSERT INTO productos (nombre,precio,stock) VALUES (?,?,?)'[nombre.precio,stock]);
+    async crear({nombre,precio,stock=0,usuario}){
+        const [resultado]= await db.query('INSERT INTO productos (nombre,precio,stock,usuario) VALUES (?,?,?,?)',[nombre,precio,stock,usuario]);
     
     return {id:resultado.insertId,nombre,precio:Number(precio),stock:Number(stock)};
     },
 
     async actualizar(id,{nombre,precio,stock = 0}){
-        const [resultado]=await.db.query('UPDATE productos SET nombre = ?, precio = ?, stock = ? WHERE id = ?',[nombre,precio,stock,id]);
+        const [resultado]=await db.query('UPDATE productos SET nombre = ?, precio = ?, stock = ? WHERE id = ?',[nombre,precio,stock,id]);
         return resultado.affectedRows;
     },
     async eliminar(id){
-        const [resultado]=await db.query('DELETE FORM productos WHERE id = ?',[id]);
+        const [resultado]=await db.query('DELETE FROM productos WHERE id = ?',[id]);
         return resultado.affectedRows;
     }
 
